@@ -1,0 +1,26 @@
+#include<bits/stdc++.h>
+using namespace std;
+ll mat[101][101];
+int main()
+ {
+	int t;
+	cin>>t;
+	while(t--){
+	    ll n,m,i,j,maxx=0;
+	    cin>>n>>m;
+	    string s1,s2;
+	    cin>>s1>>s2;
+	    memset(mat,0,sizeof(mat));
+	    for(i=1;i<=n;i++){
+	        for(j=1;j<=m;j++){
+	            if(s1[i-1]==s2[j-1]){
+	                mat[i][j]=mat[i-1][j-1]+1;
+	                maxx=max(maxx,mat[i][j]);
+	            }
+	        }
+	    }
+	  
+	    cout<<maxx<<endl;
+	}
+	return 0;
+}
