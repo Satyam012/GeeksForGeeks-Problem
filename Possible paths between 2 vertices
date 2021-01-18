@@ -1,0 +1,19 @@
+int ans;
+class Solution {
+public:
+    void dfs(vector<int>v[],vector<bool>vis,int k,int d){
+        vis[k]=true;
+        if(k==d){
+            ans++;
+            return;
+        }
+        for(auto x:v[k])if(!vis[x])dfs(v,vis,x,d);
+    }
+    
+	int countPaths(int n, vector<int> adj[], int s, int d) {
+	    ans=0;
+	    vector<bool>vis(n+1,false);
+	    dfs(adj,vis,s,d);
+	    return ans;
+	}
+};
