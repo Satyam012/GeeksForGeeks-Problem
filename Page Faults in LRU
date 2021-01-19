@@ -1,0 +1,32 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+int main() {
+	int i,j,t,n,k;
+	cin>>t;
+	while(t--){
+	    cin>>n;
+	    vector<int>v(n);
+	    for(int i=0;i<n;i++)cin>>v[i];
+	    cin>>k;
+	    map<int,list<int>::iterator>mp;
+	    list<int>lru;
+	    int cnt=0;
+	    for(int i=0;i<n;i++){
+	        if(mp.find(v[i])==mp.end()){
+	            cnt++;
+    	        if(lru.size()==k){
+    	            mp.erase(lru.back());
+    	            lru.pop_back();
+    	        }
+	        }
+	        if(mp.find(v[i])!=mp.end()){
+	            lru.erase(mp[v[i]]);
+	        }
+	        lru.push_front(v[i]);
+	        mp[v[i]]=lru.begin();
+	    }
+	    cout<<cnt<<endl;
+	}
+	return 0;
+}
