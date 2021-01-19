@@ -1,0 +1,15 @@
+int max_sum(int A[],int N)
+{
+    int sum=0,cur=0,maxx=0;
+    for(int i=0;i<N;i++){
+        sum+=A[i];
+        cur=cur+i*A[i];
+    }    
+    maxx=cur;
+    for(int i=0;i<N;i++){
+        int x=N-1-i;
+        cur=cur+sum-N*(A[x]);
+        maxx=max(maxx,cur);
+    }
+    return maxx;
+}
