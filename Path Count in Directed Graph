@@ -1,0 +1,20 @@
+void dfs(vector<bool>&vis,int s,int d,int &cnt){
+    if(s==d){
+        cnt++;
+        return;
+    }    
+    vis[s]=true;
+    for(auto x:adj[s]){
+        if(!vis[x]){
+            dfs(vis,x,d,cnt);
+        }
+    }
+    vis[s]=false;
+}
+int countPaths(int s, int d)
+{
+    vector<bool>vis(V+1,false);
+    int cnt=0;
+    dfs(vis,s,d,cnt);
+    return cnt;
+}
