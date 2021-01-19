@@ -2,35 +2,33 @@ class LRUCache
 {
 private:
     int size;
-    list<int> lru;                             
-    unordered_map<int, list<int>::iterator> mp; // key -> iterator
-    unordered_map<int, int> kv; 
-    
+    list<int>lru;
+    map<int,list<int>::iterator>mp;
+    map<int,int>keyVal;
 public:
     LRUCache(int cap):size(cap){}
     
     int get(int key)
     {
-        if (kv.count(key) == 0) return -1;
-        updateLRU(key);
-        return kv[key];
+        if(mp.find(key)==mp.end())return -1;
+        update(key);
+        return keyVal[key];
     }
     
     void set(int key, int value)
     {
-        if (kv.size() == size && kv.count(key) == 0)
-        evict();
-        updateLRU(key);
-        kv[key] = value;  
+        if(lru.size()==size && mp.find(key)==mp.end())Remove();
+        update(key);
+        keyVal[key]=value;
     }
-    void updateLRU(int key) {
-        if (kv.count(key)) lru.erase(mp[key]);
+    void update(int key){
+        if(mp.find(key)!=mp.end())lru.erase(mp[key]);
         lru.push_front(key);
-        mp[key] = lru.begin();
+        mp[key]=lru.begin();
     }
-    void evict() {
+    void Remove(){
         mp.erase(lru.back());
-        kv.erase(lru.back());
+        keyVal.erase(lru.back());
         lru.pop_back();
     }
 };
