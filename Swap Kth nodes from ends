@@ -1,0 +1,27 @@
+Node *swapkthnode(Node* head, int n, int k)
+{
+    int l=0,cnt=0;
+    Node*tmp=head;
+    while(tmp){
+        l++;
+        tmp=tmp->next;
+    }
+    if(k>l||2*k-1==l)return head;
+    Node*r1=head,*r2=head,*r1_pre=NULL,*r2_pre=NULL;
+    for(int i=1;i<k;i++){
+        r1_pre=r1;
+        r1=r1->next;
+    }
+    for(int i=1;i<=n-k;i++){
+        r2_pre=r2;
+        r2=r2->next;
+    }
+    if(r1_pre)r1_pre->next=r2;
+    if(r2_pre)r2_pre->next=r1;
+    tmp=r1->next;
+    r1->next=r2->next;
+    r2->next=tmp;
+    if(k==1)head=r2;
+    if(k==n)head=r1;
+    return head;
+}
