@@ -1,0 +1,18 @@
+set<Node*>st;
+void test(Node*root,vector<Node*>v,int k){
+    if(!root)return;
+    v.push_back(root);
+    if(!root->left&&!root->right){
+        if(v.size()>k)st.insert(v[v.size()-k-1]);
+        return;
+    }
+    test(root->left,v,k);
+    test(root->right,v,k);
+}
+int printKDistantfromLeaf(Node* root, int k)
+{
+    st.clear();
+    vector<Node*>v;
+    test(root,v,k);
+	return st.size();
+}
