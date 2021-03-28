@@ -1,0 +1,18 @@
+class Solution
+{
+    public:
+    vector<string>v;
+    void f(int x,int y,int n,string s){
+        if(x>n||y>n||x<y)return;
+        if(s.length()==2*n)v.push_back(s);
+        else{
+            f(x+1,y,n,s+"(");
+            f(x,y+1,n,s+")");
+        }
+    }
+    vector<string> AllParenthesis(int n) 
+    {
+        f(0,0,n,"");
+        return v;
+    }
+};
