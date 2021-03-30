@@ -1,0 +1,14 @@
+vector<vector<string> > Anagrams(vector<string>& s) 
+{
+    map<vector<int>,vector<string>>mp;
+    for(auto x:s){
+        vector<int>freq(26);
+        for(auto c:x)freq[c-'a']++;
+        mp[freq].push_back(x);
+    }
+    vector<vector<string>>v;
+    for(auto x:mp){
+        v.push_back(x.second);
+    }
+    return v;
+}
