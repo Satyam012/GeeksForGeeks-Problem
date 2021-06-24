@@ -1,0 +1,26 @@
+class Solution{
+  public:
+    bool isKPartitionPossible(int a[], int n, int k)
+    {
+        int s=0;
+        for(int i=0;i<n;i++)s+=a[i];
+        if(s%k!=0)return false;
+        return solve(a,0,n,k,0,s/k);
+    }
+    bool solve(int a[],int id,int n,int k,int cur,int sum){
+        if(k==0)return true;
+        if(cur>sum)return false;
+        if(cur==sum){
+            return solve(a,0,n,k-1,0,sum);
+        }
+        if(id>=n)return false;
+        for(int i=id;i<n;i++){
+            if(a[i]<0)continue;
+            int val=a[i];
+            a[i]=-1;
+            if(solve(a,i+1,n,k,cur+val,sum))return true;
+            a[i]=val;
+        }
+        return false;
+    }
+};
