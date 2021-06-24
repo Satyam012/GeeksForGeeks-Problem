@@ -1,0 +1,30 @@
+class Solution
+{
+    public:
+    //Function to return maximum sum subarray by removing at most one element.
+    int maxSumSubarray(int A[], int n)
+    {
+        if(n==1)return A[0]>0?A[0]:0;
+        int left[n],right[n],prev=0,ans=INT_MIN;
+        
+        for(int i=0;i<n;i++){
+            left[i]=max(0,prev+A[i]);
+            prev=max(0,left[i]);
+            ans=max(ans,A[i]);
+        }
+        if(ans<=0)return ans;
+        prev=0;
+        for(int i=n-1;i>=0;i--){
+            right[i]=max(0,prev+A[i]);
+            prev=max(0,right[i]);
+        }
+        for(int i=0;i<n;i++){
+            if(i==0){
+                ans=max(ans,max(right[i+1],right[i]));
+            }
+            else if(i==n-1)ans=max(ans,max(left[i-1],left[i]));
+            else ans=max(ans,max(left[i-1]+right[i+1],left[i-1]+right[i+1]+A[i]));
+        }
+        return ans;
+    }
+};
