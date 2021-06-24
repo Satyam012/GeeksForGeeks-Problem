@@ -1,0 +1,23 @@
+class Solution
+{
+    public:
+    void rearrange(struct Node *odd)
+    {
+        Node*oldpre=NULL,*pre=NULL,*cur=odd;
+        while(cur){
+            oldpre=pre;
+            pre=cur->next;
+            if(cur->next==NULL){
+                cur->next=oldpre;
+                break;
+            }
+            else if(cur->next->next==NULL){
+                pre->next=oldpre;
+                break;
+            }
+            cur->next=cur->next->next;
+            cur=cur->next;
+            pre->next=oldpre;
+        }
+    }
+};
