@@ -1,0 +1,18 @@
+class Solution
+{
+    public:
+    // Function for finding maximum AND value.
+    int maxAND (int arr[], int N)
+    {
+        int ans=0;
+        for(int i=16;i>=0;i--){
+            int cnt=0;
+            for(int j=0;j<N;j++){
+                int pattern=ans|(1<<i);
+                if ((pattern&arr[j]) == pattern)cnt++;
+            }
+            if(cnt>1)ans+=(1<<i);
+        }
+        return ans;
+    }
+};
