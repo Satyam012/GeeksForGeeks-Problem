@@ -1,0 +1,36 @@
+class Solution
+{
+    public:
+    //Function to perform case-specific sorting of strings.
+    string caseSort(string str, int n)
+    {
+        int low[26]={};
+        int upp[26]={};
+        for(auto c:str){
+            if(c>='A' &&c<='Z')upp[c-'A']++;
+            else low[c-'a']++;
+        }
+        string s;
+        for(auto c:str){
+            if(c>='A' &&c<='Z'){
+                for(int i=0;i<26;i++){
+                    if(upp[i]>0){
+                        s+=('A'+i);
+                        upp[i]--;
+                        break;
+                    }
+                }
+            }
+            else{
+                for(int i=0;i<26;i++){
+                    if(low[i]>0){
+                        s+=('a'+i);
+                        low[i]--;
+                        break;
+                    }
+                }
+            }
+        }
+        return s;
+    }
+};
