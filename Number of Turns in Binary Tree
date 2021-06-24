@@ -1,0 +1,32 @@
+bool dfs(Node*root,int val,string &s){
+    if(!root)return false;
+    if(root->data==val)return true;
+    s+="l";
+    if(dfs(root->left,val,s))return true;
+    s.pop_back();
+    s+="r";
+    if(dfs(root->right,val,s))return true;
+    s.pop_back();
+    return false;
+}
+int NumberOFTurns(struct Node* root, int first, int second)
+{
+    string s1,s2;
+    dfs(root,first,s1);
+    dfs(root,second,s2);
+    // cout<<s1<<" "<<s2<<endl;
+    int i=0,j=0;
+    while(i<s1.length() && j<s2.length() &&s1[i]==s2[j])i++,j++;
+    int cnt=-1;
+    if(i<s1.length()){
+        cnt++;
+        i++;
+        for(;i<s1.length();i++)if(s1[i]!=s1[i-1])cnt++;
+    }
+    if(j<s2.length()){
+        cnt++;
+        j++;
+        for(;j<s2.length();j++)if(s2[j]!=s2[j-1])cnt++;
+    }
+    return max(cnt,0);
+}
