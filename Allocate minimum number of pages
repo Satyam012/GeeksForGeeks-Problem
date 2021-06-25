@@ -1,0 +1,26 @@
+class Solution 
+{
+    public:
+    //Function to find minimum number of pages.
+    int findPages(int v[], int n, int D) 
+    {
+        int i,j,l=0,h=1e6;
+        if(D>n)return -1;
+        for(int i=0;i<n;i++)l=max(l,v[i]);
+        
+        while(l<=h){
+            int mid=(l+h)/2;
+            int s=0,cnt=1;
+            for(i=0;i<n;i++){
+                if(s+v[i]<=mid)s+=v[i];
+                else{
+                    s=v[i];
+                    cnt++;
+                }
+            }
+            if(cnt<=D)h=mid-1;
+            else l=mid+1;
+        }
+        return l;
+    }
+};
