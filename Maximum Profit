@@ -1,0 +1,22 @@
+class Solution {
+  public:
+    int dp[501][201][2];
+    int solve(int i,int n,int k,int status,int arr[]){
+        if(i==n || (k==0 && status==0))return 0;
+        if(dp[i][k][status]!=-1)return dp[i][k][status];
+        if(k==0 || status==1){
+            int op1=arr[i]+solve(i+1,n,k,0,arr);
+            int op2=solve(i+1,n,k,1,arr);
+            return dp[i][k][status]=max(op1,op2);
+        }
+        else{
+            int op1=-arr[i]+solve(i+1,n,k-1,1,arr);
+            int op2=solve(i+1,n,k,0,arr);
+            return dp[i][k][status]=max(op1,op2);
+        }
+    }
+    int maxProfit(int K, int N, int A[]) {
+        memset(dp,-1,sizeof dp);
+        return solve(0,N,K,0,A);
+    }
+};
