@@ -1,0 +1,21 @@
+class Solution{
+public:
+    int countBits(int n, long long int A[])
+    {
+        long long bit[32],mod=1e9+7,N=n;
+        memset(bit,0,sizeof bit);
+        for(int i=0;i<N;i++){
+            for(int j=0;j<32;j++){
+                if(A[i]&(1<<j)){
+                    bit[j]++;
+                }
+            }
+        }
+        long long ans=0;
+        for(int i=0;i<32;i++){
+            long long val=(bit[i]*(N-bit[i])*2)%mod;
+            ans=(ans+val)%mod;
+        }
+        return ans;
+    }
+};
