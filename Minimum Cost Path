@@ -1,0 +1,30 @@
+typedef pair<int, int> ipair;
+int dx[]={0,0,-1,1};
+int dy[]={1,-1,0,0};
+class Solution
+{
+    public:
+	int minimumCostPath(vector<vector<int>>& grid) 
+    {
+        int m=grid.size(),n=grid[0].size();
+        priority_queue< pair<int,ipair>,vector<pair<int,ipair>>, greater<pair<int,ipair>> >pq;
+        vector<vector<int>>dis(m,vector<int>(n,INT_MAX));
+        
+        dis[0][0]=grid[0][0];
+        pq.push({dis[0][0],{0,0}});
+        while(!pq.empty()){
+            auto p=pq.top();
+            pq.pop();
+            int dist=p.first,x=p.second.first,y=p.second.second;
+            for(int i=0;i<4;i++){
+                int cx=x+dx[i],cy=y+dy[i];
+                if(cx<0 ||cx>=m ||cy<0 ||cy>=n)continue;
+                if(dis[cx][cy]>dis[x][y]+grid[cx][cy]){
+                    dis[cx][cy]=dis[x][y]+grid[cx][cy];
+                    pq.push({dis[cx][cy],{cx,cy}});
+                }
+            }
+        }
+        return dis[m-1][n-1];
+    }
+};
