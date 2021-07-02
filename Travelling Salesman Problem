@@ -1,0 +1,21 @@
+class Solution {
+public:
+    int ans=INT_MAX;
+    void solve(int i,int cnt,int n,int sum,vector<bool>vis,vector<vector<int>>&cost){
+        if(cnt==n){
+            ans=min(ans,sum+cost[i][0]);
+            return;
+        }
+        vis[i]=true;
+        for(int j=1;j<n;j++){
+            if(vis[j]==false){
+                solve(j,cnt+1,n,sum+cost[i][j],vis,cost);
+            }
+        }
+    }
+    int total_cost(vector<vector<int>>cost){
+        vector<bool>vis(cost.size(),false);
+        solve(0,1,vis.size(),0,vis,cost);
+        return ans;
+    }
+};
