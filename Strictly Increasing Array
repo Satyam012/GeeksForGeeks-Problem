@@ -1,0 +1,14 @@
+Solution{
+	public:
+
+		int min_operations(vector<int>arr){
+		    int n=arr.size();
+		    vector<int>dp(n,1);
+		    for(int i=1;i<n;i++){
+		        for(int j=0;j<i;j++){
+		            if(arr[i]>arr[j] && (arr[i]-arr[j])>=(i-j))dp[i]=max(dp[i],dp[j]+1);
+		        }
+		    }
+		    return n-*max_element(dp.begin(),dp.end());
+		}
+};
