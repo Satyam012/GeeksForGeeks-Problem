@@ -1,0 +1,18 @@
+class Solution{
+    public:
+    vector<long long>v;
+    void solve(long long N,long long cur){
+        if(cur>N)return;
+        if(cur<=N && cur>9)v.push_back(cur);
+        int last=cur%10;
+        if(last+1<=9)solve(N,cur*10+last+1);
+        if(last-1>=0)solve(N,cur*10+last-1);
+    }
+    vector<long long> absDifOne(long long N)
+    {
+        for(int i=1;i<=9;i++)solve(N,i);
+        sort(v.begin(),v.end());
+        return v;
+    }
+
+};
