@@ -1,0 +1,23 @@
+int findK(int A[MAX][MAX], int n, int m, int k)
+{
+    int rstart=0,cstart=0,rend=n-1,cend=m-1;
+    while(rstart<=rend && cstart<=cend){
+        for(int i=cstart;i<=cend;i++){
+            if(k-- ==1)return A[rstart][i];
+        }
+        rstart++;
+        for(int i=rstart;i<=rend;i++){
+            if(k-- ==1)return A[i][cend];
+        }
+        cend--;
+        for(int i=cend;i>=cstart;i--){
+            if(k-- ==1)return A[rend][i];
+        }
+        rend--;
+        for(int i=rend;i>=rstart;i--){
+            if(k-- ==1)return A[i][cstart];
+        }
+        rstart++;
+    }
+    return -1;
+}
