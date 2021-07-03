@@ -1,0 +1,30 @@
+class Solution
+{
+    public:
+    //Function to find list of all words possible by pressing given numbers.
+    map<int ,string> m;
+
+	vector<string>ans;
+	void solve(int i,int n,int a[],string s){
+	    if(i==n)ans.push_back(s);
+	    else{
+	        for(auto c:m[a[i]]){
+	            solve(i+1,n,a,s+c);
+	        }
+	    }
+	}	    
+    vector<string> possibleWords(int a[], int N)
+    {
+    	m[2] = "abc";
+    	m[3] = "def";
+    	m[4] = "ghi";
+    	m[5] = "jkl";
+    	m[6] = "mno";
+    	m[7] = "pqrs";
+    	m[8] = "tuv";
+    	m[9] = "wxyz";
+        solve(0,N,a,"");
+        
+        return ans;
+    }
+};
