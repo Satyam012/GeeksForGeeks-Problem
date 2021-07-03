@@ -1,0 +1,23 @@
+int solve(Node*pre,Node*next){
+    int ans=0;
+    while(pre && next && pre->data==next->data){
+        pre=pre->next;
+        next=next->next;
+        ans++;
+    }
+    return ans;
+}
+int maxPalindrome(Node *head)
+{
+    Node*next=NULL,*pre=NULL,*cur=head;
+    int ans=0;
+    while(cur){
+        next=cur->next;
+        cur->next=pre;
+        ans=max(ans,2*solve(pre,next)+1);
+        ans=max(ans,2*solve(cur,next));
+        pre=cur;
+        cur=next;
+    }
+    return ans;
+}
