@@ -1,0 +1,22 @@
+class Solution
+{
+public:
+    void dfs(Node*root,int &h,int &ans,int l,int sum){
+        if(!root)return;
+        if(root->left==NULL && root->right==NULL){
+            if(l>=h)h=l;
+            if(l==h)ans=max(ans,sum+root->data);
+        }
+        else{
+            dfs(root->left,h,ans,l+1,sum+root->data);
+            dfs(root->right,h,ans,l+1,sum+root->data);
+        }
+    }
+    int sumOfLongRootToLeafPath(Node *root)
+    {
+        if(!root)return 0;
+        int ans=0,h=1;
+        dfs(root,h,ans,1,0);
+        return ans;
+    }
+};
