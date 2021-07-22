@@ -1,0 +1,26 @@
+Solution{   
+public:
+    int minimumNumberOfSwaps(string S){
+       vector<int>pos;
+       for(int i=0;i<S.length();i++){
+           if(S[i]=='[')pos.push_back(i);
+       }
+       int idx=0,count=0,ans=0;
+       for(int i=0;i<S.length();i++){
+           if(S[i]=='['){
+               idx++;
+               count++;
+           }
+           else{
+               count--;
+               if(count<0){
+                   ans+=pos[idx]-i;
+                   swap(S[pos[idx]],S[i]);
+                   idx++;
+                   count=1;
+               }
+           }
+       }
+       return ans;
+    }
+};
